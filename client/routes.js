@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
+import AlbumsList from './components/AlbumsList'
 
 /**
  * COMPONENT
@@ -24,7 +25,9 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/home" component={UserHome} />
+
+            <Route exact path="/albums" component={AlbumsList} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
