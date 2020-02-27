@@ -29,40 +29,60 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
         callbackURL: process.env.SPOTIFY_CLIENT_CALLBACK
       },
       function(accessToken, refreshToken, expires_in, profile, done) {
+        console.log('TCL: accessToken', accessToken)
         console.log('spotify PROFILE', profile)
-        User.findOrCreate({spotifyId: profile.id}, function(err, user) {
-          return done(err, user) //profile instead of user?
+        const spotifyId = profile.id
+        const email = profile.emails[0].value
+        const userName = profile.userName
+
+        User.findOrCreate({
+          where: {spotifyId},
+          defaults: {email, userName}
         })
+          .then(([user]) => done(null, user))
+          .catch(done)
+
+        // User.findOrCreate({
+        // where: {spotifyId: profile.id}},
+        // defaults: { spotifyId: profile.id, name: profile.user }
+        // function(err, user) {
+        // return done(err, user) //profile instead of user?
       }
     )
   )
-
-  router.get(
-    '/',
-    passport.authenticate('spotify', {
-      scope: ['user-read-email', 'user-read-private'],
-      showDialog: true
-    })
-    // function(req, res) {
-    //   // The request will be redirected to spotify for authentication, so this
-    //   // function will not be called.
-    // }
-  )
-
-  router.get(
-    '/callback',
-    passport.authenticate('spotify', {failureRedirect: '/login'}),
-    function(req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('/')
-    }
-  )
-
-  // ??
-  // router.get('/logout', function(req, res) {
-  //   req.logout()
-  //   res.redirect('/')
-  // })
 }
+
+router.get(
+  '/',
+  passport.authenticate('spotify', {
+    scope: [
+      'streaming',
+      'user-read-email',
+      'user-read-private',
+      'user-modify-playback-state'
+    ],
+    showDialog: true
+  })
+  // function(req, res) {
+  //   // The request will be redirected to spotify for authentication, so this
+  //   // function will not be called.
+  // }
+)
+
+router.get(
+  '/callback',
+  passport.authenticate('spotify', {failureRedirect: '/login'}),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/')
+  }
+)
+
+// ??
+// router.get('/logout', function(req, res) {
+//   req.logout()
+//   res.redirect('/')
+// })
+// }
 
 module.exports = router
