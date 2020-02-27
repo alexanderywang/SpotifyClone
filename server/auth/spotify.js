@@ -3,7 +3,6 @@ const router = require('express').Router()
 const SpotifyStrategy = require('passport-spotify').Strategy
 
 const {User} = require('../db/models')
-module.exports = router
 
 /**
  * For OAuth keys and other secrets, your Node process will search
@@ -30,6 +29,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
         callbackURL: process.env.SPOTIFY_CLIENT_CALLBACK
       },
       function(accessToken, refreshToken, expires_in, profile, done) {
+        console.log('spotify PROFILE', profile)
         User.findOrCreate({spotifyId: profile.id}, function(err, user) {
           return done(err, user) //profile instead of user?
         })
@@ -38,7 +38,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   )
 
   router.get(
-    '/auth/spotify',
+    '/',
     passport.authenticate('spotify', {
       scope: ['user-read-email', 'user-read-private'],
       showDialog: true
@@ -50,7 +50,7 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   )
 
   router.get(
-    '/auth/spotify/callback',
+    '/callback',
     passport.authenticate('spotify', {failureRedirect: '/login'}),
     function(req, res) {
       // Successful authentication, redirect home.
@@ -64,3 +64,5 @@ if (!process.env.SPOTIFY_CLIENT_ID || !process.env.SPOTIFY_CLIENT_SECRET) {
   //   res.redirect('/')
   // })
 }
+
+module.exports = router

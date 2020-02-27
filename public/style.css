@@ -27,7 +27,7 @@ p {
 
 small {
   font-size: 12px;
-  color: darkgray;
+  color: #fe5f55;
 }
 
 table {
@@ -36,7 +36,7 @@ table {
 }
 
 table tr:hover {
-  background-color: #333;
+  background-color: rgb(48, 117, 91);
 }
 
 table tr.active {
@@ -63,6 +63,7 @@ td {
   height: 100%;
   width: 100%;
   overflow: scroll;
+  color: #66e2aa;
 }
 
 #albums {
@@ -163,7 +164,7 @@ td {
 }
 
 .gray {
-  color: gray;
+  color: #94c9a9;
 }
 
 .wrap {
