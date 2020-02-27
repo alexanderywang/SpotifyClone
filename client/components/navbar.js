@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {AlbumsList} from './AlbumsList'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
@@ -12,7 +13,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <Link to="/home">Home</Link>
-          <span />
+          <span> </span>
+          <Link to="/albums">Albums</Link>
+          <span> </span>
           <a href="#" onClick={handleClick}>
             Logout
           </a>

@@ -21,9 +21,9 @@ const getAlbums = albums => ({
   type: GET_ALBUMS,
   albums
 })
-const getSingleAlbum = albumId => ({
+const getSingleAlbum = album => ({
   type: GET_SINGLE_ALBUM,
-  albumId
+  album
 })
 
 /**
@@ -41,6 +41,7 @@ export const gotAlbums = () => async dispatch => {
 
 export const gotSingleAlbum = albumId => async dispatch => {
   try {
+    console.log('IN THE SINGLE ALBUM THUNK')
     const {data} = await axios.get(`/api/albums/${albumId}`)
     dispatch(getSingleAlbum(data))
   } catch (error) {
@@ -51,15 +52,21 @@ export const gotSingleAlbum = albumId => async dispatch => {
 /**
  * REDUCER
  */
-const albumreducers = (state = initialState, action) => {
+export const albumReducers = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALBUMS:
       return action.albums
-    case GET_SINGLE_ALBUM:
-      return action.album
     default:
       return state
   }
 }
 
-export default albumreducers
+export const singleAlbumReducer = (album = {}, action) => {
+  console.log('single reducer', action)
+  switch (action.type) {
+    case GET_SINGLE_ALBUM:
+      return action.album
+    default:
+      return album
+  }
+}

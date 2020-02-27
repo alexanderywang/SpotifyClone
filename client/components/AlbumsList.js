@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {gotAlbums} from '../store'
+import {Link} from 'react-router-dom'
 
 class AlbumsList extends Component {
   componentDidMount() {
@@ -13,13 +14,17 @@ class AlbumsList extends Component {
 
     return (
       <div>
-        <h1>Albums List HERE</h1>
+        <h1>Albums List</h1>
         <div>
           {albums.length ? (
             albums.map(album => {
               return (
                 <div key={album.id}>
-                  <ul>{album.name}</ul>
+                  <Link to={`/albums/${album.id}`}>
+                    <span>{album.name}</span>
+                  </Link>
+                  <ul>by: {album.artist.name}</ul>
+                  <hr />
                 </div>
               )
             })

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import AlbumsList from './components/AlbumsList'
-
+import SingleAlbum from './components/SingleAlbum'
 /**
  * COMPONENT
  */
@@ -26,7 +26,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
-
+            <Route exact path="/albums/:albumId" component={SingleAlbum} />
             <Route exact path="/albums" component={AlbumsList} />
           </Switch>
         )}

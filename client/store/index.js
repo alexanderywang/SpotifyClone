@@ -3,9 +3,13 @@ import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
-import albumreducers from './album'
+import {albumReducers, singleAlbumReducer} from './album'
 
-const reducer = combineReducers({user, albums: albumreducers})
+const reducer = combineReducers({
+  user,
+  albums: albumReducers,
+  album: singleAlbumReducer
+})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
