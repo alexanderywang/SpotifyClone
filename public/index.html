@@ -71,11 +71,22 @@
   <body>
     <div id="app"></div>
 
+    <script
+      src="https://sdk.scdn.co/spotify-player.js"
+      type="text/javascript"
+    ></script>
+    <script>
+      window.onSpotifyWebPlaybackSDKReady = () => {
+        window.Spotify = Spotify
+      }
+    </script>
+    <!--
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
     <script>
       window.onSpotifyWebPlaybackSDKReady = () => {
+        window.Spotify = Spotify
         const token =
-          'BQDTrj-xCZNki_D0_vB1cHThutg0MLv_QuadmEPQedMcrKFKDYYWNwxNd-wSg58zP2VlqXVXXOZY2krmQivWdSa6YPxDOwxqewj-NZMmqu9u8sM-ASxiLrlJmqxfv9H-gbJspNIHr6U3sQwhlGgIdSg'
+          'BQBK-S3hzJS0DNAU4WpSrVeQcIvz02_-H__JfbfDHdcmADzOfFEWlktnXYQF8IlFa6PBYFaQ3qqlRAtBgHsmoDIQptuO1LmGtzSBS4lA11M87xjC_IxvjD_yuYxX8ShM4mzM2xTWTLFD1gSY2AnA71Ktp8X-6bqOG83U2RA5Q3g'
         const player = new Spotify.Player({
           name: 'Web Playback SDK Quick Start Player',
           getOAuthToken: cb => {
@@ -115,6 +126,6 @@
         // Connect to the player!
         player.connect()
       }
-    </script>
+    </script> -->
   </body>
 </html>

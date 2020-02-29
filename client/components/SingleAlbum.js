@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {gotSingleAlbum} from '../store/album'
+import {Link} from 'react-router-dom'
 
 export class SingleAlbum extends Component {
   componentDidMount() {
@@ -17,7 +18,9 @@ export class SingleAlbum extends Component {
     return (
       <div>
         <h2>Album: {album.name}</h2>
-        <p>By: {artist.name}</p>
+        <Link to={`/artists/${artist.id}`}>
+          <span>By: {artist.name}</span>
+        </Link>
         <h3>Tracks:</h3>
         {album.tracks
           ? album.tracks.map(track => {

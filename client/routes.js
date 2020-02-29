@@ -7,6 +7,8 @@ import {me} from './store'
 import AlbumsList from './components/AlbumsList'
 import SingleAlbum from './components/SingleAlbum'
 import Playlist from './components/Playlist'
+import Player from './components/Player'
+import ArtistsList from './components/Artists'
 /**
  * COMPONENT
  */
@@ -29,7 +31,9 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/albums/:albumId" component={SingleAlbum} />
             <Route exact path="/albums" component={AlbumsList} />
+            <Route exact path="/artists" component={ArtistsList} />
             <Route exact path="/playlist" component={Playlist} />
+            <Route exact path="/player" component={Player} />{' '}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

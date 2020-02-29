@@ -26,8 +26,13 @@ export default class Playlist extends Component {
     }
     console.log(newSong)
 
-    // const {data} = await axios.get('https://api.spotify.com/v1/tracks')
-    // console.log(data)
+    console.log(
+      'TCL: Playlist -> handleSubmit -> window.onSpotifyWebPlaybackSDKReady',
+      window.onSpotifyWebPlaybackSDKReady,
+      window.location.hash
+    )
+    const {data} = await axios.get('https://api.spotify.com/v1/tracks')
+    console.log(data)
     // this.props.addNewSong(newSong)
 
     this.setState({

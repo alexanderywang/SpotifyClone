@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {AlbumsList} from './AlbumsList'
+import {Player} from './Player'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
@@ -16,7 +17,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <span> </span>
           <Link to="/albums">Albums</Link>
           <span> </span>
+          <Link to="/artists">Artists</Link>
+          <span> </span>
           <Link to="/playlist">Playlist</Link>
+          <span> </span>
+          <Link to="/player">Player</Link>
           <span> </span>
           <a href="#" onClick={handleClick}>
             Logout
